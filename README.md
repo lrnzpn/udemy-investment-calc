@@ -3,9 +3,9 @@ Section 9 - 1st practice project: Investment Calculator
 
 ### Tasks
 - [x] Split app into components
-- [ ] Handle submit and reset button click events
-- [ ] Manage state
-- [ ] Output results conditionally
+- [x] Handle submit and reset button click events
+- [x] Manage state
+- [x] Output results conditionally
 - [ ] Bonus: styling! (styled components/css modules)
 
 ### Hints

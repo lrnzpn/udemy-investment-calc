@@ -1,6 +1,13 @@
 import styles from './InvestmentTable.module.css'
 
 const InvestmentTable = (props) => {
+
+  if(!props.items) {
+    return <p className={styles['empty-result']}>
+      No investment calculated yet.
+    </p>
+  }
+
   return (
     <table className={styles.result}>
     {/* Todo: Show below table conditionally (only once result data is available) */}
@@ -15,13 +22,15 @@ const InvestmentTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
+          {
+            props.items.map(item => <tr key={item.year}>
+              <td>{item.year}</td>
+              <td>${item.savingsEndOfYear.toFixed(2)}</td>
+              <td>${item.yearlyInterest.toFixed(2)}</td>
+              <td>${item.totalInterest.toFixed(2)}</td>
+              <td>${item.investedCapital.toFixed(2)}</td>
+            </tr>
+          )}
         </tbody>
       </table>
   )

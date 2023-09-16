@@ -18,13 +18,21 @@ input {
   background-color: transparent;
   color: #c2e9e0;
   font-size: 1rem;
+
+  &::placeholder {
+    color: #9BBAB3;
+  }
 }
 `
 
 const Input = (props) => {
   return <StyledInput>
     <label htmlFor={props.id}>{props.label} ({props.subLabel})</label>
-    <input type="number" id={props.id} />
+    <input type="number" min="0.01" step="0.01"
+      id={props.id} placeholder={props.placeholder}
+      onChange={props.eventHandler}
+      value={props.value}
+      />
   </StyledInput>
 }
 

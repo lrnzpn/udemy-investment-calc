@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
 import Input from '../../UI/Input/Input';
 import Button from '../../UI/Button/Button';
@@ -24,33 +25,87 @@ const StyledActions = styled.div`
 `;
 
 const InvestmentForm = (props) => {
+  const [currentSavings, setCurrentSavings] = useState('');
+  const [yearlySavings, setYearlySavings] = useState('');
+  const [interest, setInterest] = useState('');
+  const [duration, setDuration] = useState('');
+
+  const currentSavingsHandler = (event) => {
+    setCurrentSavings(event.target.value);
+  }
+
+  const yearlySavingsHandler = (event) => {
+    setYearlySavings(event.target.value);
+  }
+
+  const interestHandler = (event) => {
+    setInterest(event.target.value);
+  }
+
+  const durationHandler = (event) => {
+    setDuration(event.target.value);
+  }
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const userInputs = {
+      currentSavings: currentSavings,
+      yearlyContribution: yearlySavings,
+      expectedReturn: interest,
+      duration: duration,
+    };
+    props.onCalculateData(userInputs);
+    setCurrentSavings('');
+    setYearlySavings('');
+    setInterest('');
+    setDuration('');
+  }
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={submitHandler}>
       <StyledInputGroup>
         <Input 
           id="current-savings" 
           label="Current Savings" 
-          subLabel="$" />
+          subLabel="$" 
+          placeholder="25000"
+          eventHandler={currentSavingsHandler}
+          value={currentSavings}
+        />
         <Input 
           id="yearly-contribution" 
           label="Yearly Savings" 
-          subLabel="$" />
+          subLabel="$" 
+          placeholder="40000"
+          eventHandler={yearlySavingsHandler}
+          value={yearlySavings}
+        />
       </StyledInputGroup>
       <StyledInputGroup>
         <Input 
           id="expected-return" 
           label="Expected Interest" 
-          subLabel="%, per year" />
+          subLabel="%, per year" 
+          placeholder="7.5"
+          eventHandler={interestHandler}
+          value={interest}
+        />
         <Input 
           id="duration" 
           label="Investment Duration" 
-          subLabel="years" />
+          subLabel="years" 
+          placeholder="10"
+          eventHandler={durationHandler}
+          value={duration}
+        />
       </StyledInputGroup>
       <StyledActions>
         <Button 
           type="reset" 
           alt="true" 
-          label="Reset" />
+          label="Reset" 
+          eventHandler={props.onResetData}
+        />
         <Button 
           type="submit" 
           label="Calculate" />
