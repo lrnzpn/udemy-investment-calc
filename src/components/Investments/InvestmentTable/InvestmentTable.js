@@ -2,6 +2,17 @@ import styles from './InvestmentTable.module.css'
 
 const InvestmentTable = (props) => {
 
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  const formatData = (data) => {
+    return formatter.format(data);
+  }
+
   if(!props.items) {
     return <p className={styles['empty-result']}>
       No investment calculated yet.
@@ -25,10 +36,10 @@ const InvestmentTable = (props) => {
           {
             props.items.map(item => <tr key={item.year}>
               <td>{item.year}</td>
-              <td>${item.savingsEndOfYear.toFixed(2)}</td>
-              <td>${item.yearlyInterest.toFixed(2)}</td>
-              <td>${item.totalInterest.toFixed(2)}</td>
-              <td>${item.investedCapital.toFixed(2)}</td>
+              <td>{formatData(item.savingsEndOfYear)}</td>
+              <td>{formatData(item.yearlyInterest)}</td>
+              <td>{formatData(item.totalInterest)}</td>
+              <td>{formatData(item.investedCapital)}</td>
             </tr>
           )}
         </tbody>

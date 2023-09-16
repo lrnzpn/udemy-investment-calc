@@ -6,7 +6,7 @@ Section 9 - 1st practice project: Investment Calculator
 - [x] Handle submit and reset button click events
 - [x] Manage state
 - [x] Output results conditionally
-- [ ] Bonus: styling! (styled components/css modules)
+- [x] Bonus: styling! (styled components/css modules)
 
 ### Hints
 - Identify potential reusable building blocks

@@ -30,24 +30,33 @@ const InvestmentForm = (props) => {
   const [interest, setInterest] = useState('');
   const [duration, setDuration] = useState('');
 
-  const currentSavingsHandler = (event) => {
-    setCurrentSavings(event.target.value);
-  }
-
-  const yearlySavingsHandler = (event) => {
-    setYearlySavings(event.target.value);
-  }
-
-  const interestHandler = (event) => {
-    setInterest(event.target.value);
-  }
-
-  const durationHandler = (event) => {
-    setDuration(event.target.value);
+  const inputChangeHandler = (identifier, value) => {
+    switch(identifier) {
+      case 'current':
+        setCurrentSavings(value);
+        break;
+      case 'yearly': 
+        setYearlySavings(value);
+        break;
+      case 'interest':
+        setInterest(value);
+        break;
+      case 'duration':
+        setDuration(value);
+        break;
+      default: 
+        break;
+    }
   }
 
   const submitHandler = (event) => {
     event.preventDefault();
+    if(!currentSavings.trim().length
+    || !yearlySavings.trim().length
+    || !interest.trim().length
+    || !duration.trim().length) {
+      return;
+    }
     const userInputs = {
       currentSavings: currentSavings,
       yearlyContribution: yearlySavings,
@@ -55,10 +64,6 @@ const InvestmentForm = (props) => {
       duration: duration,
     };
     props.onCalculateData(userInputs);
-    setCurrentSavings('');
-    setYearlySavings('');
-    setInterest('');
-    setDuration('');
   }
 
   return (
@@ -69,7 +74,7 @@ const InvestmentForm = (props) => {
           label="Current Savings" 
           subLabel="$" 
           placeholder="25000"
-          eventHandler={currentSavingsHandler}
+          eventHandler={event=>inputChangeHandler('current', event.target.value)}
           value={currentSavings}
         />
         <Input 
@@ -77,7 +82,7 @@ const InvestmentForm = (props) => {
           label="Yearly Savings" 
           subLabel="$" 
           placeholder="40000"
-          eventHandler={yearlySavingsHandler}
+          eventHandler={event=>inputChangeHandler('yearly', event.target.value)}
           value={yearlySavings}
         />
       </StyledInputGroup>
@@ -87,7 +92,7 @@ const InvestmentForm = (props) => {
           label="Expected Interest" 
           subLabel="%, per year" 
           placeholder="7.5"
-          eventHandler={interestHandler}
+          eventHandler={event=>inputChangeHandler('interest', event.target.value)}
           value={interest}
         />
         <Input 
@@ -95,7 +100,7 @@ const InvestmentForm = (props) => {
           label="Investment Duration" 
           subLabel="years" 
           placeholder="10"
-          eventHandler={durationHandler}
+          eventHandler={event=>inputChangeHandler('duration', event.target.value)}
           value={duration}
         />
       </StyledInputGroup>
