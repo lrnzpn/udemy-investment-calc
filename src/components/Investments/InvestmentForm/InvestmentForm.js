@@ -30,6 +30,27 @@ const InvestmentForm = (props) => {
   const [interest, setInterest] = useState('');
   const [duration, setDuration] = useState('');
 
+  /* Input Change Handler Option
+    /* Use object as state
+    const [userInput, setUserInput] = useState({
+      currentSavings: 10000,
+      yearlySavings: 1200,
+      ...
+    });
+
+    inputChangeHandler = (id, value) => {
+      /* We can use a key value pair
+      setUserInput(prevState => { 
+        return {
+          ...prevState,
+          [id]: +value
+        }
+      })
+    }
+
+    /* access value by retrieving it as userInput['value']
+  */
+
   const inputChangeHandler = (identifier, value) => {
     switch(identifier) {
       case 'current':

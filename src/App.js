@@ -13,6 +13,12 @@ function App() {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
 
+    /* 
+      - elegant to put this calculation outside the calculateHandler
+      so that it will run whenever App() is called 
+      - yearlyData becomes a derived state
+      - add a checker for userInput, then compute
+    */
     const yearlyData = []; // per-year results
 
     let currentSavings = +userInput['currentSavings']; // feel free to change the shape of this input object!
